@@ -10,26 +10,53 @@ import { Card } from "../components/Card";
 import { TextInput } from "../components/TextInput";
 import { Button } from "../components/Button";
 import { Variables } from "../styles/Variables";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { QUERY_GET_USER_BY_EMAIL } from "../components/graphql/query/queryGetUserByEmail";
+import { MUTATION_ASSIGN_DEVICE } from "../components/graphql/mutation/mutationAssignDevice";
+import { QUERY_GET_DEVICE_BY_SERIAL } from "../components/graphql/query/queryGetDeviceBySerial";
 
 const Inicio = () => {
   const history = useHistory();
   const [serial, setSerial] = useState("");
+  const [serialAssing, setSerialAssing] = useState("");
+  const [userAssing, setUserAssing] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+
   // const token = localStorage.getItem(AUTH_TOKEN);
   // if (token === null) {
   //   history.push("/");
   // }
 
-  const [getUserByEmail, { data, loading, error }] = useLazyQuery(
-    QUERY_GET_USER_BY_EMAIL
-  );
+  const [
+    getUserByEmail,
+    { data: dataUser, loading: loadingUser, error: errorUser },
+  ] = useLazyQuery(QUERY_GET_USER_BY_EMAIL);
 
-  if (loading) console.log("Loading...");
-  if (error) console.log(`Error: ${error.message}`);
-  if (data) {
-    console.log(data);
+  const [
+    getDeviceBySerial,
+    { data: dataDevice, loading: loadingDevice, error: errorDevice },
+  ] = useLazyQuery(QUERY_GET_DEVICE_BY_SERIAL);
+
+  const [assignDevice, { error: errorAssign, loading: loadingAssign }] =
+    useMutation(MUTATION_ASSIGN_DEVICE);
+
+  if (loadingAssign) console.log("Loading...");
+  if (errorAssign) console.log(`Error: ${error.message}`);
+
+  if (loadingDevice) console.log("Loading...");
+  if (errorDevice) console.log(`Error: ${error.message}`);
+
+  if (loadingUser) console.log("Loading...");
+  if (errorUser) console.log(`Error: ${error.message}`);
+
+  if (dataUser) {
+    console.log(dataUser);
   }
+
+  if (dataDevice) {
+    console.log(dataDevice);
+  }
+
   return (
     <div>
       <div className="header">
@@ -77,7 +104,7 @@ const Inicio = () => {
             <Button
               title="Buscar"
               onClick={() =>
-                getUserByEmail({ variables: { serial: "1234561" } })
+                getDeviceBySerial({ variables: { serial: serial } })
               }
             />
           </div>
@@ -87,7 +114,12 @@ const Inicio = () => {
           title="Busqueda de usuario"
           description="Verifica si el usuario existe y que dispositivos tiene asignados."
         >
-          <TextInput placeholder="Correo eléctronico" />
+          <TextInput
+            value={userEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
+            type="text"
+            placeholder="Correo eléctronico"
+          />
           <div
             style={{
               display: "flex",
@@ -97,7 +129,13 @@ const Inicio = () => {
               marginBottom: 100,
             }}
           >
-            <Button title="Crear" /> <Button title="Buscar" />
+            <Button title="Crear" />{" "}
+            <Button
+              title="Buscar"
+              onClick={() =>
+                getUserByEmail({ variables: { email: userEmail } })
+              }
+            />
           </div>
         </Card>
         <div className="verticalLine"></div>
@@ -105,8 +143,18 @@ const Inicio = () => {
           title="Asignación de dispositivo"
           description="Ingresa el serial del dispositivo y el id del usuario. Si no sabes el id del usuario buscalo en el modulo del centro."
         >
-          <TextInput placeholder="Número de serial" />
-          <TextInput placeholder="ID de usuario" />
+          <TextInput
+            value={serialAssing}
+            onChange={(e) => setSerialAssing(e.target.value)}
+            type="text"
+            placeholder="Número de serial"
+          />
+          <TextInput
+            value={userAssing}
+            onChange={(e) => setUserAssing(e.target.value)}
+            type="text"
+            placeholder="ID de usuario"
+          />
           <div
             style={{
               display: "flex",
@@ -117,7 +165,17 @@ const Inicio = () => {
             }}
           >
             <div></div>
-            <Button title="Buscar" />
+            <Button
+              title="Buscar"
+              onClick={() =>
+                assignDevice({
+                  variables: {
+                    serial: serialAssing,
+                    idAssignedUser: userAssing,
+                  },
+                })
+              }
+            />
           </div>
         </Card>
       </div>
