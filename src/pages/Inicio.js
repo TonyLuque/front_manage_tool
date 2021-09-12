@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AUTH_TOKEN } from "../components/constants";
 import "../styles/Inicio.css";
@@ -10,14 +10,26 @@ import { Card } from "../components/Card";
 import { TextInput } from "../components/TextInput";
 import { Button } from "../components/Button";
 import { Variables } from "../styles/Variables";
+import { useLazyQuery } from "@apollo/client";
+import { QUERY_GET_USER_BY_EMAIL } from "../components/graphql/query/queryGetUserByEmail";
 
 const Inicio = () => {
   const history = useHistory();
+  const [serial, setSerial] = useState("");
   // const token = localStorage.getItem(AUTH_TOKEN);
   // if (token === null) {
   //   history.push("/");
   // }
 
+  const [getUserByEmail, { data, loading, error }] = useLazyQuery(
+    QUERY_GET_USER_BY_EMAIL
+  );
+
+  if (loading) console.log("Loading...");
+  if (error) console.log(`Error: ${error.message}`);
+  if (data) {
+    console.log(data);
+  }
   return (
     <div>
       <div className="header">
@@ -29,10 +41,10 @@ const Inicio = () => {
             isLink
             onClick={() => {
               localStorage.setItem(AUTH_TOKEN, null);
-              history.push("/");
+              history.push("/login");
             }}
           >
-            Salir
+            Login
           </TextSmallNormal>
         </div>
       </div>
@@ -46,7 +58,12 @@ const Inicio = () => {
           title="Busqueda de dispositivo"
           description="Ingresa el id(serial) del dispositivo para saber si esta registrado y/o asignado."
         >
-          <TextInput placeholder="Número de serial" />
+          <TextInput
+            value={serial}
+            onChange={(e) => setSerial(e.target.value)}
+            type="text"
+            placeholder="Número de serial"
+          />
           <div
             style={{
               display: "flex",
@@ -57,7 +74,12 @@ const Inicio = () => {
             }}
           >
             <Button title="Todos" />
-            <Button title="Buscar" />
+            <Button
+              title="Buscar"
+              onClick={() =>
+                getUserByEmail({ variables: { serial: "1234561" } })
+              }
+            />
           </div>
         </Card>
         <div className="verticalLine"></div>
@@ -99,7 +121,9 @@ const Inicio = () => {
           </div>
         </Card>
       </div>
-      <footer style={{ padding: 5 }}>
+      <footer
+        style={{ padding: 5, position: "fixed", bottom: 0, right: 0, left: 0 }}
+      >
         <TextSmallNormal>
           Diseño cortesia de{" "}
           <a
