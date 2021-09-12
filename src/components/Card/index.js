@@ -9,6 +9,7 @@ export const Card = ({ children, title, description }) => {
       <TextMediumNormal>{title}</TextMediumNormal>
       <_Line />
       <TextSmallNormal>{description}</TextSmallNormal>
+      {children}
     </_Container>
   );
 };

@@ -7,6 +7,7 @@ import { TextSmallNormal } from "../components/font/TexSmallNormal";
 import { TextLargeNormal } from "../components/font/TextLargeNormal";
 import { TextMediumNormal } from "../components/font/TextMediumNormal";
 import { Card } from "../components/Card";
+import { TextInput } from "../components/TextInput";
 
 const Inicio = () => {
   const history = useHistory();
@@ -40,7 +41,9 @@ const Inicio = () => {
         <Card
           title="Busqueda de dispositivo"
           description="kjsdl lsjd ad sdj d lasd lsd"
-        ></Card>
+        >
+          <TextInput placeholder="Serial" />
+        </Card>
         <div className="verticalLine"></div>
         <Card
           title="Busqueda de usuario"
