@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-pascal-case */
 import { _Container } from "./styles";
 
-export const TextSmallNormal = ({ children }) => {
-  return <_Container>{children}</_Container>;
+export const TextSmallNormal = ({ children, ...otherProps }) => {
+  return <_Container {...otherProps}>{children}</_Container>;
 };
