@@ -4,6 +4,10 @@ import { useMutation } from "@apollo/client";
 import { MUTATION_SIGNUP } from "./graphql/mutation/mutationSignup";
 import { AUTH_TOKEN } from "./constants";
 import { SplitView } from "./SplitView";
+import { TextInput } from "./TextInput";
+import { Button } from "./Button";
+import { TextMediumNormal } from "./font/TextMediumNormal";
+import { TextSmallNormal } from "./font/TexSmallNormal";
 
 const Signup = () => {
   const history = useHistory();
@@ -30,10 +34,10 @@ const Signup = () => {
   return (
     <SplitView>
       <div>
-        <h4>Registrar</h4>
+        <TextMediumNormal>Registro</TextMediumNormal>
 
         <div>
-          <input
+          <TextInput
             value={formState.name}
             onChange={(e) => {
               setFormState({
@@ -44,7 +48,7 @@ const Signup = () => {
             type="text"
             placeholder="Nombres"
           />
-          <input
+          <TextInput
             value={formState.lastname}
             onChange={(e) =>
               setFormState({
@@ -55,8 +59,7 @@ const Signup = () => {
             type="text"
             placeholder="Apellidos"
           />
-
-          <input
+          <TextInput
             value={formState.email}
             onChange={(e) =>
               setFormState({
@@ -67,7 +70,7 @@ const Signup = () => {
             type="text"
             placeholder="correo@falso.com"
           />
-          <input
+          <TextInput
             value={formState.password}
             onChange={(e) =>
               setFormState({
@@ -79,9 +82,8 @@ const Signup = () => {
             placeholder="Escoge una contraseña segura"
           />
         </div>
-
-        <div style={{ backgroundColor: "red" }} onClick={signup}>
-          Ingresar
+        <div>
+          <Button title="Registrarme" onClick={signup} />
         </div>
       </div>
     </SplitView>

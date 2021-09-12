@@ -43,8 +43,8 @@ const Login = () => {
           <TextInput
             value={txtPassword}
             onChange={(e) => setTxtPassword(e.target.value)}
-            type="text"
-            placeholder="password"
+            type="password"
+            placeholder="Contraseña"
           />
         </div>
         <div
@@ -53,23 +53,18 @@ const Login = () => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+            marginBottom: 100,
           }}
         >
           <TextSmallNormal>Olvido su contraseña</TextSmallNormal>
-          <Button title={"Ingresar"} onClick={login} type="submit" />
+          <Button title={"Ingresar"} onClick={login} />
         </div>
-        <div
-          style={{
-            color: Variables.colorWhite,
-            marginTop: 100,
-          }}
-          onClick={() => history.push("/signup")}
-        >
+        <TextSmallNormal isLink onClick={() => history.push("/signup")}>
           No tengo una cuenta,{" "}
           <span style={{ textDecorationLine: "underline" }}>
             crear una ahora
           </span>
-        </div>
+        </TextSmallNormal>
       </div>
     </SplitView>
   );
