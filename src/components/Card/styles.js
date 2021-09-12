@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const _Container = styled.div`
   text-align: "center";
-  padding: 24px;
+  padding: 0 24px;
   width: 100%;
   height: 100%;
   background-color: "red";

@@ -7,7 +7,6 @@ import { SplitView } from "./SplitView";
 import { TextInput } from "./TextInput";
 import { Button } from "./Button";
 import { TextMediumNormal } from "./font/TextMediumNormal";
-import { TextSmallNormal } from "./font/TexSmallNormal";
 
 const Signup = () => {
   const history = useHistory();

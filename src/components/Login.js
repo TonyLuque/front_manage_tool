@@ -5,7 +5,6 @@ import { MUTATION_LOGIN } from "./graphql/mutation/mutationLogin";
 import { AUTH_TOKEN } from "./constants";
 import { SplitView } from "./SplitView";
 import { TextInput } from "./TextInput";
-import { Variables } from "../styles/Variables";
 import { TextSmallNormal } from "./font/TexSmallNormal";
 import { Button } from "./Button";
 

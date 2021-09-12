@@ -18,6 +18,7 @@ import App from "./components/App";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:4000",
+  credentials: "same-origin",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -31,6 +32,9 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
+  fetchOptions: {
+    mode: "no-cors",
+  },
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
