@@ -2,7 +2,7 @@ import React from "react";
 import Login from "./Login";
 import { Switch, Route } from "react-router-dom";
 import Signup from "./Signup";
-import Inicio from "../pages/inicio";
+import Inicio from "../pages/Inicio";
 
 const App = () => {
   return (
