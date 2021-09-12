@@ -37,11 +37,11 @@ const Inicio = () => {
         djfjhdf dfhsdfh sdf fhsdfh dfhsdkfhdfhsdfhdsfhdsf
       </TextMediumNormal>
       <div className="containerModules">
-        <Card></Card>
+        <Card title="Busqueda de dispositivo"></Card>
         <div className="verticalLine"></div>
-        <Card></Card>
+        <Card title="Busqueda de usuario"></Card>
         <div className="verticalLine"></div>
-        <Card></Card>
+        <Card Asignación de dispositivo></Card>
       </div>
     </div>
   );
