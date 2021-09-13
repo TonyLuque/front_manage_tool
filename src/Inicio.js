@@ -105,7 +105,10 @@ const Inicio = () => {
               marginBottom: 16,
             }}
           >
-            <Button title="Todos" onClick={() => history.push("/devices")} />
+            <Button
+              title="Dispositivos asignados"
+              onClick={() => history.push("/devices")}
+            />
             <Button
               title="Buscar"
               onClick={() => {
