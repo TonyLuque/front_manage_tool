@@ -4,8 +4,11 @@ import { QUERY_GET_DEVICES } from "./components/graphql/query/queryGetDevices";
 import { TextSmallNormal } from "./components/font/TexSmallNormal";
 import "./Devices.css";
 import { TextLargeNormal } from "./components/font/TextLargeNormal";
+import { useHistory } from "react-router";
 
 const Devices = () => {
+  const history = useHistory();
+
   const { data, error } = useQuery(QUERY_GET_DEVICES);
   if (error) alert("Algo ha salido mal, intentalo mas tarde.");
   if (data) console.log(data);
@@ -31,6 +34,9 @@ const Devices = () => {
 
   return (
     <div className="container">
+      <TextSmallNormal className="link" onClick={() => history.push("/")}>
+        Volver
+      </TextSmallNormal>
       <TextLargeNormal>Dispositivos asignados</TextLargeNormal>
       <div className="listContainer">
         <div className="listItem titles">
