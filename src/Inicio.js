@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { AUTH_TOKEN } from "../components/constants";
-import "../styles/Inicio.css";
+import { AUTH_TOKEN } from "./constants";
+import "./styles/Inicio.css";
 
-import { TextSmallNormal } from "../components/font/TexSmallNormal";
-import { TextLargeNormal } from "../components/font/TextLargeNormal";
-import { TextMediumNormal } from "../components/font/TextMediumNormal";
-import { Card } from "../components/Card";
-import { TextInput } from "../components/TextInput";
-import { Button } from "../components/Button";
-import { Variables } from "../styles/Variables";
+import { TextSmallNormal } from "./components/font/TexSmallNormal";
+import { TextLargeNormal } from "./components/font/TextLargeNormal";
+import { TextMediumNormal } from "./components/font/TextMediumNormal";
+import { Card } from "./components/Card";
+import { TextInput } from "./components/TextInput";
+import { Button } from "./components/Button";
+import { Variables } from "./styles/Variables";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { QUERY_GET_USER_BY_EMAIL } from "../components/graphql/query/queryGetUserByEmail";
-import { MUTATION_ASSIGN_DEVICE } from "../components/graphql/mutation/mutationAssignDevice";
-import { QUERY_GET_DEVICE_BY_SERIAL } from "../components/graphql/query/queryGetDeviceBySerial";
+import { QUERY_GET_USER_BY_EMAIL } from "./components/graphql/query/queryGetUserByEmail";
+import { MUTATION_ASSIGN_DEVICE } from "./components/graphql/mutation/mutationAssignDevice";
+import { QUERY_GET_DEVICE_BY_SERIAL } from "./components/graphql/query/queryGetDeviceBySerial";
+import { CardShowDataDevice } from "./components/CardShowDataDevice";
+import { CardShowDataUser } from "./components/CardShowDataUser";
+import { IconLogo } from "./components/icon/IconLogo";
 
 const Inicio = () => {
   const history = useHistory();
@@ -38,29 +41,28 @@ const Inicio = () => {
   ] = useLazyQuery(QUERY_GET_DEVICE_BY_SERIAL);
 
   const [assignDevice, { error: errorAssign, loading: loadingAssign }] =
-    useMutation(MUTATION_ASSIGN_DEVICE);
+    useMutation(MUTATION_ASSIGN_DEVICE, {
+      onCompleted: () => alert("Se asigno el dispositivo con exito."),
+      onError: () => alert("El dispositivo ya esta asignado."),
+    });
 
   if (loadingAssign) console.log("Loading...");
-  if (errorAssign) console.log(`Error: ${error.message}`);
+  if (errorAssign) console.log(`Error: ${errorAssign.message}`);
 
   if (loadingDevice) console.log("Loading...");
-  if (errorDevice) console.log(`Error: ${error.message}`);
+  if (errorDevice) console.log(`Error: ${errorDevice.message}`);
 
   if (loadingUser) console.log("Loading...");
-  if (errorUser) console.log(`Error: ${error.message}`);
+  if (errorUser) console.log(`Error: ${errorUser.message}`);
 
   if (dataUser) {
     console.log(dataUser);
   }
 
-  if (dataDevice) {
-    console.log(dataDevice);
-  }
-
   return (
     <div>
       <div className="header">
-        logo
+        <IconLogo />
         <div className="nav">
           <TextSmallNormal>Hola</TextSmallNormal>
           <div className="verticalLine"></div>
@@ -103,11 +105,14 @@ const Inicio = () => {
             <Button title="Todos" />
             <Button
               title="Buscar"
-              onClick={() =>
-                getDeviceBySerial({ variables: { serial: serial } })
-              }
+              onClick={() => {
+                serial && getDeviceBySerial({ variables: { serial: serial } });
+              }}
             />
           </div>
+          {dataDevice !== undefined ? (
+            <CardShowDataDevice data={dataDevice.getDeviceBySerial} />
+          ) : null}
         </Card>
         <div className="verticalLine"></div>
         <Card
@@ -133,10 +138,13 @@ const Inicio = () => {
             <Button
               title="Buscar"
               onClick={() =>
-                getUserByEmail({ variables: { email: userEmail } })
+                userEmail && getUserByEmail({ variables: { email: userEmail } })
               }
             />
           </div>
+          {dataUser !== undefined ? (
+            <CardShowDataUser data={dataUser.getUserByEmail} />
+          ) : null}
         </Card>
         <div className="verticalLine"></div>
         <Card
@@ -168,19 +176,21 @@ const Inicio = () => {
             <Button
               title="Buscar"
               onClick={() =>
-                assignDevice({
-                  variables: {
-                    serial: serialAssing,
-                    idAssignedUser: userAssing,
-                  },
-                })
+                serialAssing ||
+                (userAssing &&
+                  assignDevice({
+                    variables: {
+                      serial: serialAssing,
+                      idAssignedUser: userAssing,
+                    },
+                  }))
               }
             />
           </div>
         </Card>
       </div>
       <footer
-        style={{ padding: 5, position: "fixed", bottom: 0, right: 0, left: 0 }}
+        style={{ padding: 5, position: "fixed", top: 0, right: 0, left: 0 }}
       >
         <TextSmallNormal>
           Diseño cortesia de{" "}

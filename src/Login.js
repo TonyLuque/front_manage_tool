@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { MUTATION_LOGIN } from "./graphql/mutation/mutationLogin";
+import { MUTATION_LOGIN } from "./components/graphql/mutation/mutationLogin";
 import { AUTH_TOKEN } from "./constants";
-import { SplitView } from "./SplitView";
-import { TextInput } from "./TextInput";
-import { TextSmallNormal } from "./font/TexSmallNormal";
-import { Button } from "./Button";
+import { SplitView } from "./components/SplitView";
+import { TextInput } from "./components/TextInput";
+import { TextSmallNormal } from "./components/font/TexSmallNormal";
+import { Button } from "./components/Button";
 
 const Login = () => {
   const history = useHistory();

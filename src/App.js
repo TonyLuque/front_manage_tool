@@ -1,8 +1,8 @@
 import React from "react";
-import Login from "./Login";
 import { Switch, Route } from "react-router-dom";
+import Login from "./Login";
 import Signup from "./Signup";
-import Inicio from "../pages/Inicio";
+import Inicio from "./Inicio";
 
 const App = () => {
   return (
