@@ -55,10 +55,6 @@ const Inicio = () => {
   if (loadingUser) console.log("Loading...");
   if (errorUser) console.log(`Error: ${errorUser.message}`);
 
-  if (dataUser) {
-    console.log(dataUser);
-  }
-
   return (
     <div>
       <div className="header">
@@ -102,7 +98,7 @@ const Inicio = () => {
               marginBottom: 16,
             }}
           >
-            <Button title="Todos" />
+            <Button title="Todos" onClick={() => history.push("/devices")} />
             <Button
               title="Buscar"
               onClick={() => {
