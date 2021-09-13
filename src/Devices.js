@@ -15,7 +15,10 @@ const Devices = () => {
     history.push("/login");
   }
 
-  const { data, error } = useQuery(QUERY_GET_DEVICES);
+  const { data, error } = useQuery(QUERY_GET_DEVICES, {
+    fetchPolicy: "network-only",
+    nextFetchPolicy: "network-only",
+  });
   if (error) alert("Algo ha salido mal, intentalo mas tarde.");
   if (data) console.log(data);
   let devices = [];

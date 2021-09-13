@@ -34,12 +34,18 @@ const Inicio = () => {
   const [
     getUserByEmail,
     { data: dataUser, loading: loadingUser, error: errorUser },
-  ] = useLazyQuery(QUERY_GET_USER_BY_EMAIL);
+  ] = useLazyQuery(QUERY_GET_USER_BY_EMAIL, {
+    fetchPolicy: "network-only",
+    nextFetchPolicy: "network-only",
+  });
 
   const [
     getDeviceBySerial,
     { data: dataDevice, loading: loadingDevice, error: errorDevice },
-  ] = useLazyQuery(QUERY_GET_DEVICE_BY_SERIAL);
+  ] = useLazyQuery(QUERY_GET_DEVICE_BY_SERIAL, {
+    fetchPolicy: "network-only",
+    nextFetchPolicy: "network-only",
+  });
 
   const [assignDevice, { error: errorAssign, loading: loadingAssign }] =
     useMutation(MUTATION_ASSIGN_DEVICE, {
@@ -114,7 +120,7 @@ const Inicio = () => {
         <div className="verticalLine"></div>
         <Card
           title="Busqueda de usuario"
-          description="Verifica si el usuario existe y que dispositivos tiene asignados."
+          description="Verifica si el usuario existe o crea uno, si este no esta en el sistema."
         >
           <TextInput
             value={userEmail}
