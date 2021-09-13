@@ -77,7 +77,7 @@ const Inicio = () => {
           </TextSmallNormal>
         </div>
       </div>
-      <TextLargeNormal>Suministro de dotación</TextLargeNormal>
+      <TextLargeNormal>Asignación de dotación</TextLargeNormal>
       <TextMediumNormal>
         Busca, compara y asigna la dotación a los usuarios en el sistema. Puedes
         crear los usuarios si no estan registrados.
@@ -99,7 +99,7 @@ const Inicio = () => {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: 100,
+              marginBottom: 16,
             }}
           >
             <Button title="Todos" />
@@ -131,10 +131,10 @@ const Inicio = () => {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: 100,
+              marginBottom: 16,
             }}
           >
-            <Button title="Crear" />{" "}
+            <Button title="Crear" onClick={() => history.push("/createUser")} />{" "}
             <Button
               title="Buscar"
               onClick={() =>
@@ -169,7 +169,7 @@ const Inicio = () => {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: 100,
+              marginBottom: 16,
             }}
           >
             <div></div>
