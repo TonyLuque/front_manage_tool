@@ -20,7 +20,7 @@ const Login = () => {
     },
     onCompleted: ({ login }) => {
       localStorage.setItem(AUTH_TOKEN, login.token);
-      history.push("/inicio");
+      history.push("/");
     },
     onError: (e) => console.error(e),
   });

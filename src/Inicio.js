@@ -25,10 +25,11 @@ const Inicio = () => {
   const [userAssing, setUserAssing] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
-  // const token = localStorage.getItem(AUTH_TOKEN);
-  // if (token === null) {
-  //   history.push("/");
-  // }
+  const token = localStorage.getItem(AUTH_TOKEN);
+
+  if (token === "null") {
+    history.push("/login");
+  }
 
   const [
     getUserByEmail,
@@ -69,7 +70,7 @@ const Inicio = () => {
               history.push("/login");
             }}
           >
-            Login
+            Salir
           </TextSmallNormal>
         </div>
       </div>

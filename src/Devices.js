@@ -5,9 +5,15 @@ import { TextSmallNormal } from "./components/font/TexSmallNormal";
 import "./Devices.css";
 import { TextLargeNormal } from "./components/font/TextLargeNormal";
 import { useHistory } from "react-router";
+import { AUTH_TOKEN } from "./constants";
 
 const Devices = () => {
   const history = useHistory();
+  const token = localStorage.getItem(AUTH_TOKEN);
+
+  if (token === "null") {
+    history.push("/login");
+  }
 
   const { data, error } = useQuery(QUERY_GET_DEVICES);
   if (error) alert("Algo ha salido mal, intentalo mas tarde.");

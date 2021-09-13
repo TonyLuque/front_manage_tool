@@ -26,7 +26,7 @@ const Signup = () => {
     },
     onCompleted: ({ signup }) => {
       localStorage.setItem(AUTH_TOKEN, signup.token);
-      history.push("/inicio");
+      history.push("/");
     },
   });
 
