@@ -24,7 +24,8 @@ export const CardShowDataDevice = ({ data }) => {
       ) : null}
 
       <TextSmallNormal>
-        Fecha de asignación: {data["assignedAt"]}
+        Fecha de asignación:{" "}
+        {new Date(Number(data["assignedAt"])).toLocaleDateString("es-ES")}
       </TextSmallNormal>
     </_Container>
   );
