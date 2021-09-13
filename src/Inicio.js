@@ -44,7 +44,7 @@ const Inicio = () => {
   const [assignDevice, { error: errorAssign, loading: loadingAssign }] =
     useMutation(MUTATION_ASSIGN_DEVICE, {
       onCompleted: () => alert("Se asigno el dispositivo con exito."),
-      onError: () => alert("El dispositivo ya esta asignado."),
+      onError: (e) => alert(e.message),
     });
 
   if (loadingAssign) console.log("Loading...");
@@ -173,14 +173,14 @@ const Inicio = () => {
             <Button
               title="Buscar"
               onClick={() =>
-                serialAssing ||
-                (userAssing &&
-                  assignDevice({
-                    variables: {
-                      serial: serialAssing,
-                      idAssignedUser: userAssing,
-                    },
-                  }))
+                serialAssing && userAssing
+                  ? assignDevice({
+                      variables: {
+                        serial: serialAssing,
+                        idAssignedUser: userAssing,
+                      },
+                    })
+                  : null
               }
             />
           </div>
