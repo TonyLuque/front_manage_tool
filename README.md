@@ -15,7 +15,7 @@ La pantalla de inicio se encuentra divida en tres secciones. siendo de izquierda
 # Como ejecutarlo
 
 + Clona el repositorio
-+ Instala las dependecias
++ Instala las dependecias `npm install`
 + Ejecuta `npm run start`
 
 # Nota:
