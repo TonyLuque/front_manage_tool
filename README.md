@@ -4,8 +4,7 @@ En este repositorio encontras un proyecto de React, que consiste en un módulo p
 
 El proyecto consta de 3 pantallas, inicio, login y registro.
 
-La pantalla de inicio se encuentra divida en tres secci
-ones. siendo de izquierda a derecha, busqueda del dispositivo por su serial, busqueda del usurio por email y asiganación del dispositvo a traves de su serial y el id del usuario.
+La pantalla de inicio se encuentra divida en tres secciones. siendo de izquierda a derecha, busqueda del dispositivo por su serial, busqueda del usurio por email y asiganación del dispositvo a traves de su serial y el id del usuario.
 
 + **Busqueda del dispositivo**:  Contiene un input y dos botones, el boton de **Todos** devuelve todos los dispositivos asignados, el de busqueda activa la busqueda basada en el id del input, si encuentra un dispositivo muestra una card en la parte de abajo con su información.
 
