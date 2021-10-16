@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { MUTATION_LOGIN } from "./components/graphql/mutation/mutationLogin";
@@ -7,11 +7,13 @@ import { SplitView } from "./components/SplitView";
 import { TextInput } from "./components/TextInput";
 import { TextSmallNormal } from "./components/font/TexSmallNormal";
 import { Button } from "./components/Button";
+import { GlobalContext } from "./auth/utils/GlobalContext";
 
 const Login = () => {
   const history = useHistory();
   const [txtEmail, setTxtEmail] = useState("");
   const [txtPassword, setTxtPassword] = useState("");
+  const { setToken } = useContext(GlobalContext);
 
   const [login, { error }] = useMutation(MUTATION_LOGIN, {
     variables: {
@@ -20,6 +22,7 @@ const Login = () => {
     },
     onCompleted: ({ login }) => {
       localStorage.setItem(AUTH_TOKEN, login.token);
+      setToken(login.token);
       history.push("/");
     },
     onError: (e) => console.error(e),
