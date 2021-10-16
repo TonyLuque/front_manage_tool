@@ -17,6 +17,13 @@ const Signup = () => {
     lastname: "",
   });
 
+  if (
+    window.sessionStorage.getItem(AUTH_TOKEN) !== "null" &&
+    window.sessionStorage.getItem(AUTH_TOKEN) !== null
+  ) {
+    history.push("/");
+  }
+
   const [signup] = useMutation(MUTATION_SIGNUP, {
     variables: {
       name: formState.name,
@@ -25,7 +32,7 @@ const Signup = () => {
       password: formState.password,
     },
     onCompleted: ({ signup }) => {
-      localStorage.setItem(AUTH_TOKEN, signup.token);
+      window.sessionStorage.setItem(AUTH_TOKEN, signup.token);
       history.push("/");
     },
   });

@@ -25,9 +25,9 @@ const Inicio = () => {
   const [userAssing, setUserAssing] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
-  const token = localStorage.getItem(AUTH_TOKEN);
+  const token = window.sessionStorage.getItem(AUTH_TOKEN);
 
-  if (token === "null") {
+  if (token === "null" || token === null) {
     history.push("/login");
   }
 
@@ -72,7 +72,7 @@ const Inicio = () => {
           <TextSmallNormal
             isLink
             onClick={() => {
-              localStorage.setItem(AUTH_TOKEN, null);
+              window.sessionStorage.setItem(AUTH_TOKEN, null);
               history.push("/login");
             }}
           >

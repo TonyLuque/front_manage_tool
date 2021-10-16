@@ -9,9 +9,9 @@ import { AUTH_TOKEN } from "./constants";
 
 const Devices = () => {
   const history = useHistory();
-  const token = localStorage.getItem(AUTH_TOKEN);
+  const token = window.sessionStorage.getItem(AUTH_TOKEN);
 
-  if (token === "null") {
+  if (token === "null" || token === null) {
     history.push("/login");
   }
 

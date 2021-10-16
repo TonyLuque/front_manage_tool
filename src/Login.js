@@ -15,13 +15,22 @@ const Login = () => {
   const [txtPassword, setTxtPassword] = useState("");
   const { setToken } = useContext(GlobalContext);
 
+  if (
+    window.sessionStorage.getItem(AUTH_TOKEN) !== "null" &&
+    window.sessionStorage.getItem(AUTH_TOKEN) !== null
+  ) {
+    history.push("/");
+  }
+
   const [login, { error }] = useMutation(MUTATION_LOGIN, {
     variables: {
       email: txtEmail,
       password: txtPassword,
     },
     onCompleted: ({ login }) => {
-      localStorage.setItem(AUTH_TOKEN, login.token);
+      if (process.browser) {
+        window.sessionStorage.setItem(AUTH_TOKEN, login.token);
+      }
       setToken(login.token);
       history.push("/");
     },
