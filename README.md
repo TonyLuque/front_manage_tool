@@ -1,4 +1,4 @@
-# Asiganción de dotación
+# Asignación de dotación
 
 En este repositorio encontras un proyecto de React, que consiste en un módulo para la asignicaión de dotación de una empresa.
 
